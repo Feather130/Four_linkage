@@ -1,0 +1,44 @@
+const angular = require('angular')
+const app = angular.module('app', []);
+app.controller('four', ['$scope', '$http', function($scope, $http) {
+	$scope.province = undefined;
+	$scope.city = undefined;
+	$scope.district = undefined;
+
+	function http(value) {
+		$http({
+			method: 'GET',
+			url: 'http://restapi.amap.com/v3/config/district',
+			params: {
+				subdistrict: 3,
+				showbiz: false,
+				extensions: 'base',
+				s: 'rsv3',
+				output: 'json',
+				keywords: value,
+				platform: 'JS',
+				logversion: '2.0',
+				sdkversion: '1.4.3',
+				appname: 'http://lbs.amap.com/api/javascript-api/example/district-search/city-drop-down-list',
+				csid: '9DEA5E3F-D87F-4567-BBEE-6B926B690E62',
+				key: 'a25af5e0fc9ba9404924728550c15fd0'
+			}
+		}).then(function(data) {
+			var zoom = data.data.districts[0].districts[0].level;
+			$scope[zoom] = data.data.districts[0].districts;
+		})
+	}
+
+	http(100000);
+	$scope.change = function(argument) {
+		if (argument !== null) {
+			if (argument.level === "province") {
+				$scope.city = undefined;
+				$scope.district = undefined;
+			}
+			if (argument.districts.length !== 0) {
+				$scope[argument.districts[0].level] = argument.districts
+			}
+		}
+	}
+}]);
