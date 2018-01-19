@@ -24,15 +24,19 @@
 <body ng-app='app'>
     <div ng-controller="four">
         <label>省</label>
-        <select ng-model='onlyProvince' ng-options="label.name for label in province" ng-change="change(onlyProvince)">
+        <select ng-model='onlyProvince' ng-options="label.name for label in province" change>
             <option value="">请选择</option>
         </select>
-        <label ng-show="city.length" class='ng-hide'>市</label>
-        <select ng-show="city.length" class='ng-hide' ng-model='onlyCity' ng-options="label.name for label in city" ng-change="change(onlyCity)">
+        <label ng-show="city.length" class="ng-hide">市</label>
+        <select ng-show="city.length" class="ng-hide" ng-model='onlyCity' ng-options="label.name for label in city" change>
             <option value="">请选择</option>
         </select>
-        <label ng-show="district.length" class='ng-hide'>区</label>
-        <select ng-show="district.length" class='ng-hide' ng-model='onlyDistrict' ng-options="label.name for label in district" ng-change="change(onlyDistrict)">
+        <label ng-show="district.length" class="ng-hide">区</label>
+        <select ng-show="district.length" class="ng-hide" ng-model='onlyDistrict' ng-options="label.name for label in district" change>
+            <option value="">请选择</option>
+        </select>
+        <label ng-show="street.length" class="ng-hide">街道</label>
+        <select ng-show="street.length" class="ng-hide" ng-model='onlyStreet' ng-options="label.name for label in street">
             <option value="">请选择</option>
         </select>
     </div>
